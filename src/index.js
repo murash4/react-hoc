@@ -3,19 +3,52 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 
-class App extends React.Component {
-  render () {
-    return (
-      <div>
-
-      </div>
-    )
+const starWarsChars = [
+  {
+    name: 'Дарт Вэйдер',
+    side: 'dark'
+  },
+  {
+    name: 'Люк Скайворкер',
+    side: 'light'
+  },
+  {
+    name: 'Палпатин',
+    side: 'dark'
+  },
+  {
+    name: 'Обиван Кеноби',
+    side: 'light'
   }
+]
+
+const App = ({ list, side }) =>  {
+  const filteredList = list.filter(char => char.side === side)
+
+  return (
+    <ul>
+      {
+        filteredList.map((char, index) => {
+          return (
+            <li
+              key={ char.name + index }
+            >
+              <strong>{ char.name } - </strong>
+              { char.side }
+            </li>
+          )
+        })
+      }
+    </ul>
+  )
 }
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <App
+      list={ starWarsChars }
+      side="light"
+    />
   </React.StrictMode>,
   document.getElementById('root')
 );
